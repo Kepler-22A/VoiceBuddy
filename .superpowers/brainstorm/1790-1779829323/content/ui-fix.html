@@ -1,0 +1,153 @@
+<h2>三个 UI 问题修复</h2>
+
+<div style="display:flex; gap:24px; align-items:flex-start; flex-wrap:wrap; justify-content:center;">
+
+<!-- 修复前 -->
+<div class="mockup" style="width:375px">
+  <div class="mockup-header">修复前 — 存在的问题</div>
+  <div class="mockup-body" style="padding:0; background:#f5f0eb; border-radius:12px; overflow:hidden; font-family:system-ui,sans-serif; position:relative; min-height:600px;">
+
+    <!-- TopBar — 无底部边框 -->
+    <div style="background:#fff; padding:10px 14px;">
+      <div style="display:flex; align-items:center; gap:8px;">
+        <div style="width:36px; height:36px; border-radius:50%; background:linear-gradient(135deg,#e07b5a,#f0a58b); flex-shrink:0;"></div>
+        <div style="flex:1;"><div style="font-size:14px; font-weight:600; color:#3c3c3c;">Emma</div><div style="font-size:10px; color:#999;">在线 · 英语老师</div></div>
+        <div style="font-size:10px; color:#4caf50;">● 已连接</div>
+        <div style="font-size:18px; color:#bbb;">⚙</div>
+      </div>
+    </div>
+
+    <!-- 聊天区 — 同色无边界 -->
+    <div style="padding:12px 14px 0; min-height:380px;">
+      <div style="display:flex; gap:8px; align-items:flex-start; margin-bottom:16px;">
+        <div style="width:28px; height:28px; border-radius:50%; background:linear-gradient(135deg,#e07b5a,#f0a58b); flex-shrink:0; display:flex; align-items:center; justify-content:center; color:#fff; font-size:11px;">E</div>
+        <div style="max-width:70%; background:#fff; border-radius:6px 16px 16px 16px; padding:10px 14px; font-size:13px; color:#3c3c3c; line-height:1.55; box-shadow:0 1px 2px rgba(0,0,0,0.04);">
+          Hi I'm Emma! 用英语简单介绍一下自己？
+        </div>
+      </div>
+
+      <div style="display:flex; justify-content:flex-end; margin-bottom:16px;">
+        <div style="max-width:70%; background:#e07b5a; border-radius:16px 6px 16px 16px; padding:10px 14px; font-size:13px; color:#fff; line-height:1.55;">
+          Hello! I'm Liu, I want to improve my English speaking.
+        </div>
+        <div style="width:28px; height:28px; border-radius:50%; background:#d0d0d0; flex-shrink:0; margin-left:8px;"></div>
+      </div>
+
+      <div style="display:flex; gap:8px; align-items:flex-start; margin-bottom:16px;">
+        <div style="width:28px; height:28px; border-radius:50%; background:linear-gradient(135deg,#e07b5a,#f0a58b); flex-shrink:0; display:flex; align-items:center; justify-content:center; color:#fff; font-size:11px;">E</div>
+        <div style="max-width:70%; background:#fff; border-radius:6px 16px 16px 16px; padding:10px 14px; font-size:13px; color:#3c3c3c; line-height:1.55; box-shadow:0 1px 2px rgba(0,0,0,0.04);">
+          Nice to meet you! Your pronunciation is clear. What situations do you want to use English in most?
+        </div>
+      </div>
+
+      <!-- 被遮挡的内容 -->
+      <div style="display:flex; gap:8px; align-items:flex-start; opacity:0.4;">
+        <div style="width:28px; height:28px; border-radius:50%; background:linear-gradient(135deg,#e07b5a,#f0a58b); flex-shrink:0; display:flex; align-items:center; justify-content:center; color:#fff; font-size:11px;">E</div>
+        <div style="max-width:70%; background:#fff; border-radius:6px 16px 16px 16px; padding:10px 14px; font-size:13px; color:#3c3c3c; line-height:1.55; box-shadow:0 1px 2px rgba(0,0,0,0.04);">
+          ✕ 被录音动效遮挡看不到
+        </div>
+      </div>
+    </div>
+
+    <!-- 录音区 — 高度变化，遮挡气泡 -->
+    <div style="background:#f5f0eb; text-align:center; padding:8px 0 12px; border-top:3px dashed #e07b5a33;">
+      <div style="display:flex; gap:2px; align-items:flex-end; justify-content:center; height:24px; margin-bottom:8px;">
+        <div style="width:3px; height:18px; background:#e07b5a; border-radius:2px;"></div>
+        <div style="width:3px; height:22px; background:#e07b5a; border-radius:2px;"></div>
+        <div style="width:3px; height:14px; background:#e07b5a; border-radius:2px;"></div>
+        <div style="width:3px; height:20px; background:#e07b5a; border-radius:2px;"></div>
+        <div style="width:3px; height:10px; background:#e07b5a; border-radius:2px;"></div>
+      </div>
+      <div style="color:#e07b5a; font-size:10px;">松开发送</div>
+      <div style="width:56px; height:56px; border-radius:50%; background:#ef4444; margin:8px auto 0;"></div>
+      <div style="font-size:9px; color:#999; margin-top:4px;">↑ 录音时高度膨胀，推走聊天区</div>
+    </div>
+  </div>
+</div>
+
+<!-- 修复后 -->
+<div class="mockup" style="width:375px">
+  <div class="mockup-header">修复后 — 三项修复</div>
+  <div class="mockup-body" style="padding:0; background:#f5f0eb; border-radius:12px; overflow:hidden; font-family:system-ui,sans-serif; position:relative; min-height:600px;">
+
+    <!-- TopBar — 加底部边框 -->
+    <div style="background:#fff; padding:10px 14px; border-bottom:1px solid #e8e3dc;">
+      <div style="display:flex; align-items:center; gap:8px;">
+        <div style="width:36px; height:36px; border-radius:50%; background:linear-gradient(135deg,#e07b5a,#f0a58b); flex-shrink:0;"></div>
+        <div style="flex:1;"><div style="font-size:14px; font-weight:600; color:#3c3c3c;">Emma</div><div style="font-size:10px; color:#999;">在线 · 英语老师</div></div>
+        <div style="font-size:10px; color:#4caf50;">● 已连接</div>
+        <div style="font-size:18px; color:#bbb;">⚙</div>
+      </div>
+    </div>
+
+    <!-- 聊天区 — 有分隔 -->
+    <div style="padding:12px 14px 0; min-height:380px;">
+      <div style="display:flex; gap:8px; align-items:flex-start; margin-bottom:22px;">
+        <div style="width:28px; height:28px; border-radius:50%; background:linear-gradient(135deg,#e07b5a,#f0a58b); flex-shrink:0; display:flex; align-items:center; justify-content:center; color:#fff; font-size:11px;">E</div>
+        <div style="max-width:70%; background:#fff; border-radius:6px 16px 16px 16px; padding:10px 14px; font-size:13px; color:#3c3c3c; line-height:1.55; box-shadow:0 1px 2px rgba(0,0,0,0.04);">
+          Hi I'm Emma! 用英语简单介绍一下自己？
+        </div>
+      </div>
+
+      <div style="display:flex; justify-content:flex-end; margin-bottom:22px;">
+        <div style="max-width:70%; background:#e07b5a; border-radius:16px 6px 16px 16px; padding:10px 14px; font-size:13px; color:#fff; line-height:1.55;">
+          Hello! I'm Liu, I want to improve my English speaking.
+        </div>
+        <div style="width:28px; height:28px; border-radius:50%; background:#d0d0d0; flex-shrink:0; margin-left:8px;"></div>
+      </div>
+
+      <div style="display:flex; gap:8px; align-items:flex-start; margin-bottom:22px;">
+        <div style="width:28px; height:28px; border-radius:50%; background:linear-gradient(135deg,#e07b5a,#f0a58b); flex-shrink:0; display:flex; align-items:center; justify-content:center; color:#fff; font-size:11px;">E</div>
+        <div style="max-width:70%; background:#fff; border-radius:6px 16px 16px 16px; padding:10px 14px; font-size:13px; color:#3c3c3c; line-height:1.55; box-shadow:0 1px 2px rgba(0,0,0,0.04);">
+          Nice to meet you! Your pronunciation is clear. What situations do you want to use English in most?
+        </div>
+      </div>
+
+      <div style="display:flex; gap:8px; align-items:flex-start; margin-bottom:22px;">
+        <div style="width:28px; height:28px; border-radius:50%; background:linear-gradient(135deg,#e07b5a,#f0a58b); flex-shrink:0; display:flex; align-items:center; justify-content:center; color:#fff; font-size:11px;">E</div>
+        <div style="max-width:70%; background:#fff; border-radius:6px 16px 16px 16px; padding:10px 14px; font-size:13px; color:#3c3c3c; line-height:1.55; box-shadow:0 1px 2px rgba(0,0,0,0.04);">
+          That's great! We can practice different types of conversations.
+        </div>
+      </div>
+    </div>
+
+    <!-- 录音区 — 固定高度，带顶部分隔线 -->
+    <div style="background:#f5f0eb; text-align:center; padding:10px 0 16px; border-top:1px solid #e8e3dc;">
+      <div style="width:56px; height:56px; border-radius:50%; background:#e07b5a; margin:0 auto; display:flex; align-items:center; justify-content:center;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="8" y="2" width="8" height="12" rx="4"/>
+          <path d="M12 18v4M8 22h8"/>
+          <path d="M5 10c0 3.9 3.1 7 7 7s7-3.1 7-7"/>
+        </svg>
+      </div>
+      <div style="font-size:9px; color:#999; margin-top:4px;">↓ 固定高度，不再推走聊天区</div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<hr style="margin:24px 0; border-color:#e8e3dc">
+
+<h3>改动清单</h3>
+
+<div class="cards">
+  <div class="card" style="flex:1; min-width:200px;">
+    <div class="card-body">
+      <h3>1. Scroll 跟踪</h3>
+      <p>LazyColumn <code>animateScrollToItem</code> 用 <code>messages.size</code>（含占位符），确保气泡扩展时自动滚到底部</p>
+    </div>
+  </div>
+  <div class="card" style="flex:1; min-width:200px;">
+    <div class="card-body">
+      <h3>2. 录音区固定高度</h3>
+      <p>移除 SoundWaveBars 和"松开发送"文字。录音时仅按钮变红+波纹，底部高度不变</p>
+    </div>
+  </div>
+  <div class="card" style="flex:1; min-width:200px;">
+    <div class="card-body">
+      <h3>3. 边界分隔</h3>
+      <p>TopBar 加 <code>border-bottom</code>，底部录音区加 <code>border-top</code>，颜色 <code>#e8e3dc</code></p>
+    </div>
+  </div>
+</div>

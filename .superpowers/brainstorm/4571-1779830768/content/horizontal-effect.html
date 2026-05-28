@@ -1,0 +1,126 @@
+<h2>纯横向动效 — 底部高度不变</h2>
+<p class="subtitle">只向左右扩展，不增加纵向空间。三个方案都在 60dp 定高底部栏内</p>
+
+<div style="display:flex; gap:20px; align-items:flex-start; flex-wrap:wrap; justify-content:center;">
+
+<!-- A: 两侧扩展柱状条 -->
+<div style="width:390px; background:#f5f0eb; border-radius:24px; overflow:hidden; font-family:system-ui,sans-serif; box-shadow:0 8px 40px rgba(0,0,0,0.15); min-height:740px; display:flex; flex-direction:column;">
+  <div style="background:#fff; padding:10px 14px; border-bottom:1px solid #e8e3dc;">
+    <div style="display:flex; align-items:center; gap:8px;">
+      <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#e07b5a,#f0a58b);flex-shrink:0;"></div>
+      <div style="flex:1;"><div style="font-size:14px;font-weight:600;color:#3c3c3c;">Emma</div><div style="font-size:10px;color:#999;">在线 · 英语老师</div></div>
+      <div style="font-size:10px;color:#4caf50;">● 已连接</div><div style="font-size:18px;color:#bbb;">⚙</div>
+    </div>
+  </div>
+  <div style="flex:1; padding:14px;">
+    <div style="display:flex;gap:8px;margin-bottom:22px;"><div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#e07b5a,#f0a58b);flex-shrink:0;"></div><div style="max-width:70%;background:#fff;border-radius:6px 16px 16px 16px;padding:10px 14px;font-size:13px;color:#3c3c3c;">Hi I'm Emma!</div></div>
+    <div style="display:flex;justify-content:flex-end;margin-bottom:22px;"><div style="max-width:70%;background:#e07b5a;border-radius:16px 6px 16px 16px;padding:10px 14px;font-size:13px;color:#fff;">Hello!</div><div style="width:28px;height:28px;border-radius:50%;background:#d0d0d0;flex-shrink:0;margin-left:8px;"></div></div>
+  </div>
+
+  <!-- 底部栏 — 方案 A: 两侧柱状条水平展开 -->
+  <div style="border-top:1px solid #e8e3dc; padding:6px 0; background:#f5f0eb; display:flex; align-items:center; justify-content:center; gap:4px; height:48px;">
+    <!-- 左侧声波柱 — 向左边延伸 -->
+    <div style="display:flex; gap:2px; align-items:flex-end; height:36px;">
+      <div class="hb hb2" style="width:3px;border-radius:2px;background:#e07b5a;"></div>
+      <div class="hb hb1" style="width:3px;border-radius:2px;background:#e07b5a;"></div>
+      <div class="hb hb3" style="width:3px;border-radius:2px;background:#ef4444;"></div>
+      <div class="hb hb4" style="width:3px;border-radius:2px;background:#ef4444;"></div>
+    </div>
+    <!-- 按钮 -->
+    <div style="width:48px;height:48px;border-radius:50%;background:#ef4444;display:flex;align-items:center;justify-content:center;box-shadow:0 0 16px rgba(239,68,68,0.4);flex-shrink:0;">
+      <div style="width:10px;height:10px;background:#fff;border-radius:2px;"></div>
+    </div>
+    <!-- 右侧声波柱 — 向右延伸 -->
+    <div style="display:flex; gap:2px; align-items:flex-end; height:36px;">
+      <div class="hb hb5" style="width:3px;border-radius:2px;background:#ef4444;"></div>
+      <div class="hb hb3" style="width:3px;border-radius:2px;background:#ef4444;"></div>
+      <div class="hb hb2" style="width:3px;border-radius:2px;background:#e07b5a;"></div>
+      <div class="hb hb1" style="width:3px;border-radius:2px;background:#e07b5a;"></div>
+    </div>
+  </div>
+  <div style="font-size:9px;color:#999;text-align:center;padding-bottom:6px;">A — 两侧声波柱，横向拉开</div>
+</div>
+
+<!-- B: 水平光条 -->
+<div style="width:390px; background:#f5f0eb; border-radius:24px; overflow:hidden; font-family:system-ui,sans-serif; box-shadow:0 8px 40px rgba(0,0,0,0.15); min-height:740px; display:flex; flex-direction:column;">
+  <div style="background:#fff; padding:10px 14px; border-bottom:1px solid #e8e3dc;">
+    <div style="display:flex; align-items:center; gap:8px;">
+      <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#e07b5a,#f0a58b);flex-shrink:0;"></div>
+      <div style="flex:1;"><div style="font-size:14px;font-weight:600;color:#3c3c3c;">Emma</div><div style="font-size:10px;color:#999;">在线 · 英语老师</div></div>
+      <div style="font-size:10px;color:#4caf50;">● 已连接</div><div style="font-size:18px;color:#bbb;">⚙</div>
+    </div>
+  </div>
+  <div style="flex:1; padding:14px;">
+    <div style="display:flex;gap:8px;margin-bottom:22px;"><div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#e07b5a,#f0a58b);flex-shrink:0;"></div><div style="max-width:70%;background:#fff;border-radius:6px 16px 16px 16px;padding:10px 14px;font-size:13px;color:#3c3c3c;">Hi I'm Emma!</div></div>
+  </div>
+
+  <!-- 底部栏 — 方案 B: 水平呼吸光条 -->
+  <div style="border-top:1px solid #e8e3dc; padding:6px 0; background:#f5f0eb; display:flex; align-items:center; justify-content:center; gap:10px; height:48px;">
+    <!-- 左侧水平光条 -->
+    <div class="glow-bar" style="width:60px;height:3px;background:linear-gradient(90deg, transparent, #ef4444);border-radius:2px;"></div>
+    <!-- 按钮 -->
+    <div style="width:48px;height:48px;border-radius:50%;background:#ef4444;display:flex;align-items:center;justify-content:center;box-shadow:0 0 16px rgba(239,68,68,0.4);flex-shrink:0;">
+      <div style="width:10px;height:10px;background:#fff;border-radius:2px;"></div>
+    </div>
+    <!-- 右侧水平光条 -->
+    <div class="glow-bar" style="width:60px;height:3px;background:linear-gradient(90deg, #ef4444, transparent);border-radius:2px;"></div>
+  </div>
+  <div style="font-size:9px;color:#999;text-align:center;padding-bottom:6px;">B — 两侧水平光条，呼吸闪烁</div>
+</div>
+
+<!-- C: 更宽声波（12条） -->
+<div style="width:390px; background:#f5f0eb; border-radius:24px; overflow:hidden; font-family:system-ui,sans-serif; box-shadow:0 8px 40px rgba(0,0,0,0.15); min-height:740px; display:flex; flex-direction:column;">
+  <div style="background:#fff; padding:10px 14px; border-bottom:1px solid #e8e3dc;">
+    <div style="display:flex; align-items:center; gap:8px;">
+      <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#e07b5a,#f0a58b);flex-shrink:0;"></div>
+      <div style="flex:1;"><div style="font-size:14px;font-weight:600;color:#3c3c3c;">Emma</div><div style="font-size:10px;color:#999;">在线 · 英语老师</div></div>
+      <div style="font-size:10px;color:#4caf50;">● 已连接</div><div style="font-size:18px;color:#bbb;">⚙</div>
+    </div>
+  </div>
+  <div style="flex:1; padding:14px;">
+    <div style="display:flex;gap:8px;margin-bottom:22px;"><div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#e07b5a,#f0a58b);flex-shrink:0;"></div><div style="max-width:70%;background:#fff;border-radius:6px 16px 16px 16px;padding:10px 14px;font-size:13px;color:#3c3c3c;">Hi I'm Emma!</div></div>
+    <div style="display:flex;justify-content:flex-end;margin-bottom:22px;"><div style="max-width:70%;background:#e07b5a;border-radius:16px 6px 16px 16px;padding:10px 14px;font-size:13px;color:#fff;">Hello!</div><div style="width:28px;height:28px;border-radius:50%;background:#d0d0d0;flex-shrink:0;margin-left:8px;"></div></div>
+  </div>
+
+  <!-- 底部栏 — 方案 C: 更宽声波 -->
+  <div style="border-top:1px solid #e8e3dc; padding:6px 0; background:#f5f0eb; display:flex; align-items:center; justify-content:center; gap:6px; height:48px;">
+    <!-- 左侧 6 条 -->
+    <div style="display:flex; gap:2px; align-items:flex-end; height:34px;">
+      <div class="hb hb1" style="width:3px;border-radius:2px;background:#e07b5a;"></div>
+      <div class="hb hb3" style="width:3px;border-radius:2px;background:#e07b5a;"></div>
+      <div class="hb hb2" style="width:3px;border-radius:2px;background:#ef4444;"></div>
+      <div class="hb hb5" style="width:3px;border-radius:2px;background:#ef4444;"></div>
+      <div class="hb hb4" style="width:3px;border-radius:2px;background:#ef4444;"></div>
+      <div class="hb hb3" style="width:3px;border-radius:2px;background:#e07b5a;"></div>
+    </div>
+    <!-- 按钮 -->
+    <div style="width:48px;height:48px;border-radius:50%;background:#ef4444;display:flex;align-items:center;justify-content:center;box-shadow:0 0 16px rgba(239,68,68,0.4);flex-shrink:0;">
+      <div style="width:10px;height:10px;background:#fff;border-radius:2px;"></div>
+    </div>
+    <!-- 右侧 6 条 -->
+    <div style="display:flex; gap:2px; align-items:flex-end; height:34px;">
+      <div class="hb hb2" style="width:3px;border-radius:2px;background:#e07b5a;"></div>
+      <div class="hb hb4" style="width:3px;border-radius:2px;background:#ef4444;"></div>
+      <div class="hb hb5" style="width:3px;border-radius:2px;background:#ef4444;"></div>
+      <div class="hb hb1" style="width:3px;border-radius:2px;background:#ef4444;"></div>
+      <div class="hb hb3" style="width:3px;border-radius:2px;background:#e07b5a;"></div>
+      <div class="hb hb2" style="width:3px;border-radius:2px;background:#e07b5a;"></div>
+    </div>
+  </div>
+  <div style="font-size:9px;color:#999;text-align:center;padding-bottom:6px;">C — 左右各 6 条，更宽覆盖</div>
+</div>
+
+</div>
+
+<style>
+.hb { animation-duration: 0.45s; animation-iteration-count: infinite; animation-timing-function: ease-in-out; }
+.hb1 { animation-name: h1; } .hb2 { animation-name: h2; } .hb3 { animation-name: h3; } .hb4 { animation-name: h4; } .hb5 { animation-name: h5; }
+@keyframes h1 { 0%,100%{height:5px} 50%{height:20px} }
+@keyframes h2 { 0%,100%{height:8px} 50%{height:28px} }
+@keyframes h3 { 0%,100%{height:6px} 50%{height:24px} }
+@keyframes h4 { 0%,100%{height:10px} 50%{height:18px} }
+@keyframes h5 { 0%,100%{height:9px} 50%{height:30px} }
+
+.glow-bar { animation: glow 0.8s ease-in-out infinite; }
+@keyframes glow { 0%,100%{opacity:0.3} 50%{opacity:1} }
+</style>
