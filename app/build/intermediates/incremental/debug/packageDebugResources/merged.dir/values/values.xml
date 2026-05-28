@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="app_name">Voice Buddy</string>
-    <style name="Theme.VoiceBuddy" parent="android:Theme.Material.Light.NoActionBar">
-        <item name="android:statusBarColor">#F5F0EB</item>
-        <item name="android:windowBackground">#F5F0EB</item>
-    </style>
-</resources>
