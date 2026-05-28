@@ -33,6 +33,7 @@ class QwenClient(
     private val instructions: String,
     private val logFile: File,
     model: String = "qwen3.5-omni-plus-realtime",
+    private val voice: String = "Tina",
 ) {
     private val url = "wss://dashscope.aliyuncs.com/api-ws/v1/realtime?model=$model"
 
@@ -62,7 +63,7 @@ class QwenClient(
                 flog("onOpen")
                 events.trySend(QwenEvent.Connected)
 
-                val sessionConfig = """{"type":"session.update","session":{"modalities":["text","audio"],"voice":"Ethan","instructions":${JSONObject.quote(instructions)},"input_audio_format":"pcm16","output_audio_format":"pcm16","input_audio_transcription":{"model":null},"turn_detection":null}}"""
+                val sessionConfig = """{"type":"session.update","session":{"modalities":["text","audio"],"voice":${JSONObject.quote(voice)},"instructions":${JSONObject.quote(instructions)},"input_audio_format":"pcm16","output_audio_format":"pcm16","input_audio_transcription":{"model":null},"turn_detection":null}}"""
                 webSocket.send(sessionConfig)
                 flog("session.update sent")
             }

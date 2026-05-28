@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.englishvoicebuddy.data.PromptStore
+import com.englishvoicebuddy.data.VoiceConfig
 import com.englishvoicebuddy.engine.AudioEngine
 import com.englishvoicebuddy.network.QwenClient
 import com.englishvoicebuddy.network.QwenEvent
@@ -13,6 +14,8 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import org.json.JSONArray
+import org.json.JSONObject
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -29,6 +32,7 @@ class ChatViewModel(application: Application) : AndroidViewModel(application) {
 
     private val audioEngine = AudioEngine()
     private val promptStore = PromptStore(application)
+    private val _voices: List<VoiceConfig> = loadVoices()
     private var client: QwenClient? = null
     private val logFile = File(application.filesDir, "debug.log").also { it.writeText("") }
 
@@ -80,13 +84,36 @@ class ChatViewModel(application: Application) : AndroidViewModel(application) {
     fun getApiKey(): String = promptStore.getApiKey().orEmpty()
     fun getPrompt(): String = promptStore.getPrompt()
     fun getModel(): String = promptStore.getModel()
+    fun getVoice(): String = promptStore.getVoice()
+    fun getVoices(): List<VoiceConfig> = _voices
 
     fun connect() { client?.disconnect(); connectToQwen() }
+
+    private fun loadVoices(): List<VoiceConfig> {
+        return try {
+            val json = getApplication<Application>().assets
+                .open("qwen-omni-voices.json")
+                .bufferedReader()
+                .use { it.readText() }
+            val arr = JSONObject(json).getJSONArray("voices")
+            (0 until arr.length()).map { i ->
+                val obj = arr.getJSONObject(i)
+                VoiceConfig(
+                    voice = obj.getString("voice"),
+                    name = obj.getString("name"),
+                    description = obj.getString("description"),
+                    accent = obj.optString("accent", null)?.takeIf { it.isNotEmpty() && it != "null" },
+                )
+            }
+        } catch (e: Exception) {
+            emptyList()
+        }
+    }
 
     private fun connectToQwen() {
         val apiKey = promptStore.getApiKey() ?: run { _connected.value = false; return }
         try {
-            client = QwenClient(apiKey, promptStore.getPrompt(), logFile, promptStore.getModel()).also { c ->
+            client = QwenClient(apiKey, promptStore.getPrompt(), logFile, promptStore.getModel(), promptStore.getVoice()).also { c ->
                 c.connect()
                 viewModelScope.launch { for (event in c.events) handleEvent(event) }
             }
@@ -280,9 +307,10 @@ class ChatViewModel(application: Application) : AndroidViewModel(application) {
     fun onUserScrolledUp() { _showScrollBadge.value = true }
     fun onScrollToBottom() { _showScrollBadge.value = false }
 
-    fun saveSettings(apiKey: String, model: String, prompt: String) {
+    fun saveSettings(apiKey: String, model: String, voice: String, prompt: String) {
         promptStore.saveApiKey(apiKey)
         promptStore.saveModel(model)
+        promptStore.saveVoice(voice)
         promptStore.savePrompt(prompt)
         client?.disconnect()
         connectToQwen()

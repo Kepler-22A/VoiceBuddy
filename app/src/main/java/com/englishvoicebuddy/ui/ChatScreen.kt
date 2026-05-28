@@ -118,8 +118,10 @@ fun ChatScreen(viewModel: ChatViewModel) {
             ApiSettingsSheet(
                 apiKey = viewModel.getApiKey(),
                 model = viewModel.getModel(),
-                onSave = { apiKey, model ->
-                    viewModel.saveSettings(apiKey, model, viewModel.getPrompt())
+                voices = viewModel.getVoices(),
+                currentVoice = viewModel.getVoice(),
+                onSave = { apiKey, model, voice ->
+                    viewModel.saveSettings(apiKey, model, voice, viewModel.getPrompt())
                     showApiSettings = false
                 },
             )
@@ -136,7 +138,7 @@ fun ChatScreen(viewModel: ChatViewModel) {
             SettingsSheet(
                 prompt = viewModel.getPrompt(),
                 onSave = { prompt ->
-                    viewModel.saveSettings(viewModel.getApiKey(), viewModel.getModel(), prompt)
+                    viewModel.saveSettings(viewModel.getApiKey(), viewModel.getModel(), viewModel.getVoice(), prompt)
                     showPromptSettings = false
                 },
                 onReset = {

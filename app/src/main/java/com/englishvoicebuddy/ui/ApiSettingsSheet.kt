@@ -12,6 +12,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
@@ -26,6 +28,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.englishvoicebuddy.data.VoiceConfig
 import com.englishvoicebuddy.ui.theme.BgWarm
 import com.englishvoicebuddy.ui.theme.Orange
 import com.englishvoicebuddy.ui.theme.TextPrimary
@@ -34,18 +37,22 @@ import com.englishvoicebuddy.ui.theme.TextSecondary
 private val MODELS = listOf(
     "qwen3.5-omni-plus-realtime",
     "qwen3.5-omni-flash-realtime",
-    "qwen3-omni-flash-realtime",
 )
 
 @Composable
 fun ApiSettingsSheet(
     apiKey: String,
     model: String,
-    onSave: (apiKey: String, model: String) -> Unit,
+    voices: List<VoiceConfig>,
+    currentVoice: String,
+    onSave: (apiKey: String, model: String, voice: String) -> Unit,
 ) {
     var editingKey by remember { mutableStateOf(apiKey) }
     var editingModel by remember { mutableStateOf(model) }
     var modelExpanded by remember { mutableStateOf(false) }
+    var editingVoice by remember { mutableStateOf(currentVoice) }
+    var voiceExpanded by remember { mutableStateOf(false) }
+    val selectedVoice = voices.find { it.voice == editingVoice }
 
     Column(
         modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp).padding(bottom = 24.dp),
@@ -102,17 +109,71 @@ fun ApiSettingsSheet(
             }
         }
 
+        Spacer(Modifier.height(14.dp))
+
+        Text("音色", fontSize = 11.sp, color = TextSecondary)
+        Spacer(Modifier.height(4.dp))
+        Box(
+            Modifier.fillMaxWidth().clip(RoundedCornerShape(10.dp))
+                .background(BgWarm).border(1.dp, if (voiceExpanded) Orange else TextSecondary.copy(alpha = 0.2f), RoundedCornerShape(10.dp))
+                .clickable { voiceExpanded = !voiceExpanded }
+                .padding(12.dp)
+        ) {
+            Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+                Column(Modifier.weight(1f)) {
+                    Text(selectedVoice?.name ?: editingVoice, fontSize = 12.sp, color = TextPrimary, fontWeight = FontWeight.SemiBold)
+                    selectedVoice?.description?.let {
+                        Text(it, fontSize = 10.sp, color = TextSecondary, maxLines = 1)
+                    }
+                }
+                Text("▼", fontSize = 10.sp, color = TextSecondary)
+            }
+        }
+        if (voiceExpanded) {
+            Spacer(Modifier.height(4.dp))
+            Box(
+                Modifier.fillMaxWidth().height(200.dp).clip(RoundedCornerShape(10.dp))
+                    .background(BgWarm).border(1.dp, Orange.copy(alpha = 0.4f), RoundedCornerShape(10.dp))
+            ) {
+                LazyColumn {
+                    items(voices) { v ->
+                        val isSelected = v.voice == editingVoice
+                        Box(
+                            Modifier.fillMaxWidth()
+                                .background(if (isSelected) BgWarm else BgWarm.copy(alpha = 0.5f))
+                                .clickable { editingVoice = v.voice; voiceExpanded = false }
+                                .padding(horizontal = 12.dp, vertical = 9.dp)
+                        ) {
+                            Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+                                Column(Modifier.weight(1f)) {
+                                    Text(v.name, fontSize = 12.sp, color = TextPrimary, fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal)
+                                    Row {
+                                        Text(v.description, fontSize = 10.sp, color = TextSecondary, maxLines = 1)
+                                        v.accent?.let { acc ->
+                                            Spacer(Modifier.width(4.dp))
+                                            Text("· $acc", fontSize = 10.sp, color = Orange.copy(alpha = 0.7f))
+                                        }
+                                    }
+                                }
+                                if (isSelected) Text("✓", fontSize = 12.sp, color = Orange, fontWeight = FontWeight.Bold)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         Spacer(Modifier.height(16.dp))
 
         Row(Modifier.fillMaxWidth()) {
             Box(Modifier.weight(1f).clip(RoundedCornerShape(8.dp)).background(androidx.compose.ui.graphics.Color.Transparent)
                 .border(1.dp, TextSecondary.copy(alpha = 0.3f), RoundedCornerShape(8.dp))
-                .clickable { onSave(apiKey, model) }.padding(vertical = 7.dp),
+                .clickable { onSave(apiKey, model, currentVoice) }.padding(vertical = 7.dp),
                 contentAlignment = Alignment.Center
             ) { Text("取消", fontSize = 12.sp, color = TextSecondary) }
             Spacer(Modifier.width(8.dp))
             Box(Modifier.weight(2f).clip(RoundedCornerShape(8.dp)).background(Orange)
-                .clickable { onSave(editingKey, editingModel) }.padding(vertical = 7.dp),
+                .clickable { onSave(editingKey, editingModel, editingVoice) }.padding(vertical = 7.dp),
                 contentAlignment = Alignment.Center
             ) { Text("保存", fontSize = 12.sp, color = androidx.compose.ui.graphics.Color.White, fontWeight = FontWeight.SemiBold) }
         }
